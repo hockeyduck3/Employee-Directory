@@ -4,6 +4,7 @@ import API from '../../util/api';
 
 import Row from '../row/index';
 import Column from '../column/index';
+import Card from '../card';
 
 class Main extends Component {
     state = {
@@ -29,7 +30,11 @@ class Main extends Component {
                     results.map((employees, i) => (
                         <Row key={i}>
                             <Column>
-                                <p>{employees.name.first}</p>
+                                <Card
+                                    image={employees.picture.large}
+                                    firstName={employees.name.first}
+                                    lastName={employees.name.last}
+                                />
                             </Column>
                         </Row>
                     ))
