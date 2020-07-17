@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 
 import API from '../../util/api';
 
+import Row from '../row/index';
+import Column from '../column/index';
+
 class Main extends Component {
     state = {
         results: []
@@ -12,12 +15,26 @@ class Main extends Component {
             this.setState({
                 results: res.data.results
             });
+
+            console.log(this.state.results);
         });
     }
 
     render() {
+        const results = this.state.results;
+
         return (
-            <h1>Hello world</h1>
+            <div>
+                {
+                    results.map((employees, i) => (
+                        <Row key={i}>
+                            <Column>
+                                <p>{employees.name.first}</p>
+                            </Column>
+                        </Row>
+                    ))
+                }
+            </div>
         )
     }
 }
