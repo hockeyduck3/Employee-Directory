@@ -1,7 +1,8 @@
 .card {
-    margin: 15px;
+    margin: 15px auto;
     border: 3px solid #45457D;
     box-shadow: 2px 4px 3px -1px #45457D;
+    width: 95%;
 }
 
 .profileImg {
@@ -9,4 +10,9 @@
     border: 2px solid black;
     border-radius: 0.5rem;
     margin-right: 50px;
+}
+
+.text {
+    font-size: 18px;
+    font-family: 'Kaushan Script', cursive;
 }

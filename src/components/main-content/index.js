@@ -25,21 +25,22 @@ class Main extends Component {
         const results = this.state.results;
 
         return (
-            <div>
-                {
-                    results.map((employees, i) => (
-                        <Row key={i}>
-                            <Column>
-                                <Card
-                                    image={employees.picture.large}
-                                    firstName={employees.name.first}
-                                    lastName={employees.name.last}
-                                />
-                            </Column>
-                        </Row>
-                    ))
-                }
-            </div>
+            <Row>
+            {
+                results.map((employees, i) => (
+                    <Column key={i}>
+                        <Card
+                            image={employees.picture.large}
+                            firstName={employees.name.first}
+                            lastName={employees.name.last}
+                            age={employees.dob.age}
+                            phoneNum={employees.phone}
+                            email={employees.email}
+                        />
+                    </Column>
+                ))
+            }
+            </Row>
         )
     }
 }
