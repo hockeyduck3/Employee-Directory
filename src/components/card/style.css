@@ -6,9 +6,10 @@
 }
 
 .profileImg {
-    float: left;
     border: 2px solid black;
     border-radius: 0.5rem;
+    box-shadow: 2px 4px 3px -1px #444;
+    float: left;
     margin-right: 50px;
 }
 

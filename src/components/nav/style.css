@@ -1,12 +1,22 @@
 .navbar {
     background-color: #45457D;
     box-shadow: 2px 5px 8px -3px #444;
-    height: 120px;
+    height: 130px;
     margin-bottom: 30px;
 }
 
 .navbar-brand {
     margin: 0 auto;
     font-size: 35px;
+    font-family: 'Kaushan Script', cursive;
+}
+
+.input-group {
+    width: 90%;
+    margin: 8px auto;
+}
+
+.searchBar {
+    border-radius: 0.5rem;
     font-family: 'Kaushan Script', cursive;
 }

@@ -15,7 +15,11 @@ footer {
 
 .footerText {
     font-size: 18px;
-    line-height: 1.1rem;
+    line-height: 1.3rem;
+}
+
+.footerTop {
+    padding-top: 15px;
 }
 
 .logo {
