@@ -12,7 +12,12 @@
     margin-right: 50px;
 }
 
+p {
+    margin-bottom: 0.6rem;
+}
+
 .text {
     font-size: 18px;
     font-family: 'Kaushan Script', cursive;
+    margin-bottom: 8px;
 }
