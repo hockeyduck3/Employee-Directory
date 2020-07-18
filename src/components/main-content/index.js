@@ -6,17 +6,18 @@ import Nav from '../nav/index';
 import Row from '../row/index';
 import Column from '../column/index';
 import Card from '../card';
-import Footer from '../footer/index';
 import Container from '../container';
 
 class Main extends Component {
     state = {
+        allResults: [],
         results: []
     }
 
     componentDidMount() {
         API.findPeople().then(res => {
             this.setState({
+                allResults: res.data.results,
                 results: res.data.results
             });
 
@@ -24,15 +25,32 @@ class Main extends Component {
         });
     }
 
-    submitFunc(event) {
-        event.preventDefault();
+    submitFunc = (event) => {
+        const value = event.target.value;
+
+        const allResults = this.state.allResults;
+
+        setTimeout(() => {
+            
+            const filtered = allResults.filter(employee => 
+                employee.name.first.toLowerCase().includes(value.toLowerCase()) || employee.name.last.toLowerCase().includes(value.toLowerCase())
+            );
+
+
+            if (value !== '' && filtered.length !== 0) {
+                this.setState({results: filtered});
+            } else {
+                this.setState({results: this.state.allResults});
+            }
+
+        }, 500)
     }
 
     render() {
         const results = this.state.results;
 
         return (
-            <div>
+            <div className='content'>
                 <Nav submitFunc={this.submitFunc} />
 
                 <Container>
@@ -53,8 +71,6 @@ class Main extends Component {
                         }
                     </Row>
                 </Container>
-
-                <Footer />
             </div>
         )
     }

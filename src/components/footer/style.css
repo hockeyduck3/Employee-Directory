@@ -9,8 +9,9 @@ footer {
     color: white;
     height: 7.2rem;
     font-family: 'Kaushan Script', cursive;
-    margin-top: 30px;
     text-align: center;
+    margin-top: 30px;
+    flex-shrink: 0;
 }
 
 .footerText {

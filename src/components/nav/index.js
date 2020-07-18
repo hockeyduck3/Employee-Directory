@@ -7,8 +7,8 @@ function Nav(props) {
         <nav className='navbar navbar-dark'>
             <span className='navbar-brand'>Employee Directory</span>
             
-            <form className='input-group' onSubmit={props.submitFunc}>
-                <input className='form-control searchBar' type='search' placeholder='Search' aria-label='Search' />
+            <form className='input-group' onSubmit={event => {event.preventDefault()}}>
+                <input className='form-control searchBar' type='search' placeholder='Search' aria-label='Search' onChange={props.submitFunc}/>
             </form>
         </nav>
     )
