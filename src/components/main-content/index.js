@@ -31,10 +31,22 @@ class Main extends Component {
         const allResults = this.state.allResults;
 
         setTimeout(() => {
+
+            // This will allow the user to search by phone number or dob
+            if (value.match(/[0-9]/gi)) {
+                var filtered = allResults.filter(employee => 
+                    employee.phone.includes(value) || employee.dob.date.includes(value)
+                );
+            } 
             
-            const filtered = allResults.filter(employee => 
-                employee.name.first.toLowerCase().includes(value.toLowerCase()) || employee.name.last.toLowerCase().includes(value.toLowerCase())
-            );
+            // Or the user can search by name instead
+            else {
+                // eslint-disable-next-line no-redeclare
+                var filtered = allResults.filter(employee => 
+                    employee.name.first.toLowerCase().includes(value.toLowerCase()) || employee.name.last.toLowerCase().includes(value.toLowerCase())
+                );
+            }
+            
 
 
             if (value !== '' && filtered.length !== 0) {
@@ -63,6 +75,7 @@ class Main extends Component {
                                         firstName={employees.name.first}
                                         lastName={employees.name.last}
                                         age={employees.dob.age}
+                                        DOB={employees.dob.date}
                                         phoneNum={employees.phone}
                                         email={employees.email}
                                     />

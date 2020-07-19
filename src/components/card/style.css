@@ -10,7 +10,9 @@
     border-radius: 0.5rem;
     box-shadow: 2px 4px 3px -1px #444;
     float: left;
-    margin-right: 50px;
+    margin-right: 40px;
+    margin-bottom: 6px;
+    width: 40%;
 }
 
 p {
@@ -20,5 +22,26 @@ p {
 .text {
     font-size: 18px;
     font-family: 'Kaushan Script', cursive;
-    margin-bottom: 8px;
+    margin-bottom: 13px;
+}
+
+.moment {
+    margin-left: 5px;
+}
+
+/* Media */
+
+@media(max-width: 640px) {
+    .text, .email {
+        font-size: 16px;
+        margin-bottom: 3px;
+    }
+
+    .email {
+        font-size: 13px;
+    }
+
+    .profileImg {
+        margin-right: 10px;
+    }
 }
