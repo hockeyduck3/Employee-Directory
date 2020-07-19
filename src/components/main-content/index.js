@@ -80,12 +80,23 @@ class Main extends Component {
 
         const dropdownValue = event.target.innerText;
 
-        if (dropdownValue === 'By Name') {
-            // Found this solution here: https://stackoverflow.com/questions/53821428/cannot-sort-array-of-objects-in-react
-            const sorted = [...this.state.results].sort((a, b) => {
-                if (a.name.first < b.name.first) return -1;
-                return 0;
-            });
+        if (dropdownValue !== 'By Default') {
+            let sorted;
+
+            if (dropdownValue === 'By Name') {
+                // Found this solution here: https://stackoverflow.com/questions/53821428/cannot-sort-array-of-objects-in-react
+                sorted = [...this.state.results].sort((a, b) => {
+                    if (a.name.first < b.name.first) return -1;
+                    return 0;
+                });
+            }
+
+            else {
+                sorted = [...this.state.results].sort((a, b) => {
+                    if (a.dob.age < b.dob.age) return -1;
+                    return 0;
+                });
+            }
 
             this.setState({
                 allResultsSorted: sorted, 
@@ -96,7 +107,7 @@ class Main extends Component {
             dropdownName.innerText = dropdownValue;
         }
 
-        if (dropdownValue === 'By Default') {
+        else {
             this.setState({
                 results: this.state.allResults,
                 sorted: false

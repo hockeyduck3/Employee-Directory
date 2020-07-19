@@ -19,6 +19,8 @@ function Nav(props) {
                     <button className='dropdown-item' onClick={props.dropdownFunc}>By Default</button>
                     <div className='dropdown-divider'></div>
                     <button className='dropdown-item' onClick={props.dropdownFunc}>By Name</button>
+                    <div className='dropdown-divider'></div>
+                    <button className='dropdown-item' onClick={props.dropdownFunc}>By Age</button>
                 </div>
             </div>
         </nav>
