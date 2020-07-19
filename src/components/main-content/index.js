@@ -11,7 +11,9 @@ import Container from '../container';
 class Main extends Component {
     state = {
         allResults: [],
-        results: []
+        allResultsSorted: [],
+        results: [],
+        sorted: false
     }
 
     componentDidMount() {
@@ -30,32 +32,78 @@ class Main extends Component {
 
         const allResults = this.state.allResults;
 
+        const allResultsSorted = this.state.allResultsSorted;
+
+        let filtered;
+
+        let arrayToUse;
+
+        if (!this.state.sorted) {
+            arrayToUse = allResults;
+        } else {
+            arrayToUse = allResultsSorted;
+        }
+
         setTimeout(() => {
+                // This will allow the user to search by phone number or dob
+                if (value.match(/[0-9]/gi)) {
+                    filtered = arrayToUse.filter(employee => 
+                        employee.phone.includes(value) || employee.dob.date.includes(value)
+                    );
+                } 
+                
+                // Or the user can search by name instead
+                else {
+                    // eslint-disable-next-line no-redeclare
+                    filtered = arrayToUse.filter(employee => 
+                        employee.name.first.toLowerCase().includes(value.toLowerCase()) || employee.name.last.toLowerCase().includes(value.toLowerCase())
+                    );
+                }
+                
 
-            // This will allow the user to search by phone number or dob
-            if (value.match(/[0-9]/gi)) {
-                var filtered = allResults.filter(employee => 
-                    employee.phone.includes(value) || employee.dob.date.includes(value)
-                );
-            } 
-            
-            // Or the user can search by name instead
-            else {
-                // eslint-disable-next-line no-redeclare
-                var filtered = allResults.filter(employee => 
-                    employee.name.first.toLowerCase().includes(value.toLowerCase()) || employee.name.last.toLowerCase().includes(value.toLowerCase())
-                );
-            }
-            
 
+                if (value !== '' && filtered.length !== 0) {
+                    this.setState({results: filtered});
+                } else {
+                    if (!this.state.sorted) {
+                        this.setState({results: this.state.allResults});
+                    } else {
+                        this.setState({results: this.state.allResultsSorted});
+                    }
 
-            if (value !== '' && filtered.length !== 0) {
-                this.setState({results: filtered});
-            } else {
-                this.setState({results: this.state.allResults});
-            }
+                }
+        }, 300)
+    }
 
-        }, 500)
+    dropdownFunc = (event) => {
+        const dropdownName = document.getElementById('dropdownMenuButton');
+
+        const dropdownValue = event.target.innerText;
+
+        if (dropdownValue === 'By Name') {
+            // Found this solution here: https://stackoverflow.com/questions/53821428/cannot-sort-array-of-objects-in-react
+            const sorted = [...this.state.results].sort((a, b) => {
+                if (a.name.first < b.name.first) return -1;
+                return 0;
+            });
+
+            this.setState({
+                allResultsSorted: sorted, 
+                results: sorted, 
+                sorted: true
+            });
+
+            dropdownName.innerText = dropdownValue;
+        }
+
+        if (dropdownValue === 'By Default') {
+            this.setState({
+                results: this.state.allResults,
+                sorted: false
+            });
+
+            dropdownName.innerText = 'Sort';
+        }
     }
 
     render() {
@@ -63,7 +111,10 @@ class Main extends Component {
 
         return (
             <div className='content'>
-                <Nav submitFunc={this.submitFunc} />
+                <Nav 
+                    submitFunc={this.submitFunc}
+                    dropdownFunc={this.dropdownFunc}
+                />
 
                 <Container>
                     <Row>
