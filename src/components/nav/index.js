@@ -12,14 +12,20 @@ function Nav(props) {
             </form>
 
             <div className='dropdown'>
+
                 <button className='btn btn-secondary' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
-                    Sort
+                    <p id='sortBtn'>Sort</p> <i className='fas fa-angle-up' id='arrow'></i>
                 </button>
+
                 <div className='dropdown-menu dropdown-menu-right' aria-labelledby='dropdownMenuButton'>
                     <button className='dropdown-item' onClick={props.dropdownFunc}>By Default</button>
+                    
                     <div className='dropdown-divider'></div>
+
                     <button className='dropdown-item' onClick={props.dropdownFunc}>By Name</button>
+
                     <div className='dropdown-divider'></div>
+                    
                     <button className='dropdown-item' onClick={props.dropdownFunc}>By Age</button>
                 </div>
             </div>

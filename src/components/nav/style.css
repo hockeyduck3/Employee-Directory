@@ -35,6 +35,9 @@
     width: 110px;
 }
 
+#sortBtn, #nameBtn {
+    display: inline;
+}
 
 /* Media */
 

@@ -13,17 +13,21 @@ class Main extends Component {
         allResults: [],
         allResultsSorted: [],
         results: [],
-        sorted: false
+        sorted: false,
+        nameDescend: false
     }
 
     componentDidMount() {
+        // Ascending or Descending arrow
+        const arrow = document.getElementById('arrow');
+
+        arrow.style.display = 'none';
+
         API.findPeople().then(res => {
             this.setState({
                 allResults: res.data.results,
                 results: res.data.results
             });
-
-            console.log(this.state.results);
         });
     }
 
@@ -76,21 +80,46 @@ class Main extends Component {
     }
 
     dropdownFunc = (event) => {
-        const dropdownName = document.getElementById('dropdownMenuButton');
+        const dropdownValue = event.target.innerText.trim();
 
-        const dropdownValue = event.target.innerText;
+        const sortBtn = document.getElementById('sortBtn');
+
+        const arrow = document.getElementById('arrow');
 
         if (dropdownValue !== 'By Default') {
             let sorted;
 
+            // If the user is sorting by name
             if (dropdownValue === 'By Name') {
                 // Found this solution here: https://stackoverflow.com/questions/53821428/cannot-sort-array-of-objects-in-react
                 sorted = [...this.state.results].sort((a, b) => {
-                    if (a.name.first < b.name.first) return -1;
+                    
+                    // If the user chose to show the results in ascending orderr
+                    if (!this.state.nameDescend) {
+
+                        // Quick if statement to make sure the ascending or descending arrow is allows pointing in the right direction
+                        if (arrow.classList.value === 'fas fa-angle-down') {
+                            arrow.classList.replace('fa-angle-down', 'fa-angle-up')
+                        }
+
+                        this.setState({nameDescend: true});
+
+                        if (a.name.first < b.name.first) return -1;
+                    } 
+                    
+                    // Descending order
+                    else {
+                        arrow.classList.replace('fa-angle-up', 'fa-angle-down');
+                        
+                        this.setState({nameDescend: false});
+
+                        if (a.name.first > b.name.first) return -1;
+                    }
                     return 0;
                 });
             }
 
+            // If the user chose to sort by age
             else {
                 sorted = [...this.state.results].sort((a, b) => {
                     if (a.dob.age < b.dob.age) return -1;
@@ -104,16 +133,22 @@ class Main extends Component {
                 sorted: true
             });
 
-            dropdownName.innerText = dropdownValue;
+            arrow.style.display = 'inline';
+
+            sortBtn.innerText = dropdownValue;
         }
 
+        // Or if the user chose default sorting
         else {
+            arrow.style.display = 'none';
+
             this.setState({
                 results: this.state.allResults,
-                sorted: false
+                sorted: false,
+                nameDescend: false
             });
 
-            dropdownName.innerText = 'Sort';
+            sortBtn.innerText = 'Sort';
         }
     }
 
