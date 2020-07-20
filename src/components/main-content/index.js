@@ -27,6 +27,7 @@ class Main extends Component {
         API.findPeople().then(res => {
             this.setState({
                 allResults: res.data.results,
+                allResultsSorted: res.data.results,
                 results: res.data.results
             });
         });
@@ -93,7 +94,7 @@ class Main extends Component {
             // If the user is sorting by name
             if (dropdownValue === 'By Name') {
                 // Found this solution here: https://stackoverflow.com/questions/53821428/cannot-sort-array-of-objects-in-react
-                sorted = [...this.state.results].sort((a, b) => {
+                sorted = [...this.state.allResultsSorted].sort((a, b) => {
                     
                     // If the user chose to show the results in ascending orderr
                     if (!this.state.nameDescend) {
@@ -122,7 +123,7 @@ class Main extends Component {
 
             // If the user chose to sort by age
             else {
-                sorted = [...this.state.results].sort((a, b) => {
+                sorted = [...this.state.allResultsSorted].sort((a, b) => {
                     if (!this.state.ageDescend) {
                         if (arrow.classList.value === 'fas fa-angle-down') {
                             arrow.classList.replace('fa-angle-down', 'fa-angle-up')
@@ -142,6 +143,12 @@ class Main extends Component {
                     }
                     return 0;
                 });
+            }
+
+            const searchVal = document.getElementById('searchBar');
+
+            if (searchVal.value !== '') {
+                searchVal.value = ''; 
             }
 
             this.setState({
