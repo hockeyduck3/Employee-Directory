@@ -54,7 +54,7 @@ class Main extends Component {
                 // This will allow the user to search by phone number or dob
                 if (value.match(/[0-9]/gi)) {
                     filtered = arrayToUse.filter(employee => 
-                        employee.phone.includes(value) || employee.dob.date.includes(value)
+                        employee.phone.includes(value) || employee.dob.date.includes(value) || employee.dob.age.toString().includes(value)
                     );
                 } 
                 
