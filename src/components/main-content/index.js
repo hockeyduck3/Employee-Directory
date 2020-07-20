@@ -14,7 +14,8 @@ class Main extends Component {
         allResultsSorted: [],
         results: [],
         sorted: false,
-        nameDescend: false
+        nameDescend: false,
+        ageDescend: false
     }
 
     componentDidMount() {
@@ -122,7 +123,23 @@ class Main extends Component {
             // If the user chose to sort by age
             else {
                 sorted = [...this.state.results].sort((a, b) => {
-                    if (a.dob.age < b.dob.age) return -1;
+                    if (!this.state.ageDescend) {
+                        if (arrow.classList.value === 'fas fa-angle-down') {
+                            arrow.classList.replace('fa-angle-down', 'fa-angle-up')
+                        }
+
+                        if (a.dob.age < b.dob.age) return -1;
+
+                        this.setState({ageDescend: true})
+                    } 
+                    
+                    else {
+                        arrow.classList.replace('fa-angle-up', 'fa-angle-down');
+
+                        if (a.dob.age > b.dob.age) return -1;
+
+                        this.setState({ageDescend: false})
+                    }
                     return 0;
                 });
             }
@@ -145,7 +162,8 @@ class Main extends Component {
             this.setState({
                 results: this.state.allResults,
                 sorted: false,
-                nameDescend: false
+                nameDescend: false,
+                ageDescend: false
             });
 
             sortBtn.innerText = 'Sort';
