@@ -60,14 +60,11 @@ class Main extends Component {
                 
                 // Or the user can search by name instead
                 else {
-                    // eslint-disable-next-line no-redeclare
                     filtered = arrayToUse.filter(employee => 
                         employee.name.first.toLowerCase().includes(value.toLowerCase()) || employee.name.last.toLowerCase().includes(value.toLowerCase())
                     );
                 }
                 
-
-
                 if (value !== '' && filtered.length !== 0) {
                     this.setState({results: filtered});
                 } else {
