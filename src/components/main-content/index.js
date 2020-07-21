@@ -161,6 +161,8 @@ class Main extends Component {
 
         // Or if the user chose default sorting
         else {
+            document.getElementById('searchBar').value = ''; 
+
             arrow.style.display = 'none';
 
             this.setState({
